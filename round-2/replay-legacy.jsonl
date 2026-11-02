@@ -1,0 +1,23 @@
+{"buyHoldPct":201.82,"max_drawdown_pct":30.05,"pnl_pct":146.48,"ran":true,"reason":null,"runId":"mimo-1","trades":46}
+{"buyHoldPct":201.82,"max_drawdown_pct":30.2,"pnl_pct":152.72,"ran":true,"reason":null,"runId":"gemini-1","trades":44}
+{"buyHoldPct":201.82,"max_drawdown_pct":30.2,"pnl_pct":152.72,"ran":true,"reason":null,"runId":"gemini-2","trades":44}
+{"buyHoldPct":201.82,"max_drawdown_pct":31.18,"pnl_pct":132.13,"ran":true,"reason":null,"runId":"muse-1","trades":84}
+{"buyHoldPct":201.82,"max_drawdown_pct":41.46,"pnl_pct":176.41,"ran":true,"reason":null,"runId":"deepseek-1","trades":38}
+{"buyHoldPct":201.82,"max_drawdown_pct":26.43,"pnl_pct":239.81,"ran":true,"reason":null,"runId":"sonnet-1","trades":34}
+{"buyHoldPct":201.82,"max_drawdown_pct":27.53,"pnl_pct":216.54,"ran":true,"reason":null,"runId":"mimo-2","trades":34}
+{"buyHoldPct":201.82,"max_drawdown_pct":29.0,"pnl_pct":20.91,"ran":true,"reason":null,"runId":"gpt56-1","trades":52}
+{"buyHoldPct":201.82,"max_drawdown_pct":33.45,"pnl_pct":95.35,"ran":true,"reason":null,"runId":"opus-1","trades":89}
+{"buyHoldPct":201.82,"max_drawdown_pct":33.45,"pnl_pct":95.35,"ran":true,"reason":null,"runId":"fable-2","trades":89}
+{"buyHoldPct":201.82,"max_drawdown_pct":36.99,"pnl_pct":62.95,"ran":true,"reason":null,"runId":"gpt56-2","trades":85}
+{"buyHoldPct":201.82,"max_drawdown_pct":37.27,"pnl_pct":108.19,"ran":true,"reason":null,"runId":"sonnet-2","trades":81}
+{"buyHoldPct":201.82,"max_drawdown_pct":38.03,"pnl_pct":103.28,"ran":true,"reason":null,"runId":"deepseek-2","trades":81}
+{"buyHoldPct":201.82,"max_drawdown_pct":38.28,"pnl_pct":77.13,"ran":true,"reason":null,"runId":"fable-1","trades":96}
+{"buyHoldPct":201.82,"max_drawdown_pct":39.73,"pnl_pct":109.03,"ran":true,"reason":null,"runId":"muse-2","trades":21}
+{"buyHoldPct":201.82,"max_drawdown_pct":41.31,"pnl_pct":77.95,"ran":true,"reason":null,"runId":"opus-2","trades":93}
+{"buyHoldPct":201.82,"max_drawdown_pct":30.99,"pnl_pct":108.76,"ran":true,"reason":null,"runId":"grok-1","trades":56}
+{"buyHoldPct":201.82,"max_drawdown_pct":36.6,"pnl_pct":99.92,"ran":true,"reason":null,"runId":"grok47-1","trades":110}
+{"buyHoldPct":201.82,"max_drawdown_pct":38.03,"pnl_pct":103.28,"ran":true,"reason":null,"runId":"astra6-1","trades":81}
+{"buyHoldPct":201.82,"max_drawdown_pct":38.03,"pnl_pct":103.28,"ran":true,"reason":null,"runId":"astra6-2","trades":81}
+{"ran":false,"reason":"no script","runId":"grok47-2"}
+{"buyHoldPct":201.82,"max_drawdown_pct":30.99,"pnl_pct":-22.08,"ran":true,"reason":null,"runId":"haiku-1","trades":236}
+{"buyHoldPct":201.82,"max_drawdown_pct":44.41,"pnl_pct":-12.77,"ran":true,"reason":null,"runId":"haiku-2","trades":382}

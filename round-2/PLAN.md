@@ -13,13 +13,17 @@ Round 1 tested frozen strategies on a past period (October 2023 to September 202
 ## Tape
 
 - Market: BTCUSDT 4h, spot, from Binance public data. Candles are not redistributed here. Their SHA-256 is published with each reading.
-- First candle: **2026-11-05 00:00 UTC**. All scripts are public before it.
-- Indicators warm up on this tape, as in round 1, so slow rules stay flat for their first weeks.
+- First scored candle: **2026-11-05 00:00 UTC**. All scripts are public before it.
+- The tape given to the engine starts on **2026-09-01 00:00 UTC**, so that the slowest rule (300 bars) has warmed up before the first scored candle. Nothing before the first scored candle counts in a score. A rule already in position at that moment stays in position, as it would have in live.
 - Fees: 10 bps per side, as in round 1.
 
 ## Engine
 
-Strategy Arena Lab 0.1.0-255, freeze `20261102-255-n2`, commit `072267a040d0d947ee4c94ee0f29c1ddd948f9d5`, with `replay.patch` (SHA-256 `4c5db3b61592da87159e4fe0d24142a4a368e1b94d5cc6119fa46d8ae2446066`, test harness only), tool `run_sandbox_backtest`. The same engine runs every entry and buy-and-hold at every reading.
+Strategy Arena Lab 0.1.0-255, freeze `20261102-255-n2`, commit `072267a040d0d947ee4c94ee0f29c1ddd948f9d5`, with `replay.patch` (SHA-256 `86b74cdbbda84c1de4113071b3e297b21240b037514723238ea91f1dc34018f0`, test harness only), tool `run_sandbox_backtest`, `executionSemantics: tv_exact_v1` set explicitly so that a later change of default cannot alter this round. The same engine runs every entry at every reading.
+
+## Equity
+
+Scores come from the engine itself, with no separate reconstruction. For each UTC day, the entry is rerun on the tape cut at that day's last 4h close, and `equity_final` is read. Return and maximum drawdown are computed on this daily series from the last close before the first scored candle. Before this plan, cuts at two dates on the round 1 tape gave the same opening trades as the full run, for all 22 scripts. Buy-and-hold is computed on the same daily closes from the same starting point, with the same fees.
 
 ## Readings
 
@@ -33,7 +37,7 @@ Each reading covers the first candle up to the last candle closed before that da
 
 ## Ranking, mechanical
 
-Return divided by maximum drawdown, after fees. An entry needs at least 10 closed trades to be ranked; otherwise it is shown as "too few trades". Models with several entries get the average of their entries. Buy-and-hold is shown beside them. An entry that does not run scores nothing and is shown as such. Ties: lower maximum drawdown.
+Return divided by maximum drawdown on the daily series above, after fees. An entry needs at least 10 trades closed after the first scored candle to be ranked; otherwise it is shown as "too few trades". Models with several entries get the average of their entries. Buy-and-hold is shown beside them. An entry that does not run scores nothing and is shown as such. Ties: lower maximum drawdown.
 
 ## Limits
 
@@ -43,8 +47,14 @@ Return divided by maximum drawdown, after fees. An entry needs at least 10 close
 - The referee, Claude, is also a contestant, which is why the score is mechanical.
 - None of these strategies trades real money.
 
-## Check of the engine against round 1
+## Round 1 used other semantics
 
-`replay-check.json` replays the entries on the round 1 sealed tape with this engine. **Round 1 figures are not all reproduced:** 10 of 21 entries are within 1 point of return, the others differ, up to about 108 points, often with a different trade count, and one entry that exceeded the work budget in round 1 now runs. Round 1 ran on earlier Lab versions; the cause has not been established on the date of this plan. Round 1 and round 2 figures must therefore not be compared directly. Round 2 entries are only compared with each other, on one engine.
+Replaying these entries with this engine does not reproduce round 1, because round 1 ran under `legacy_v1` and the engine defaults to `tv_exact_v1` since Lab 241. With `executionSemantics: legacy_v1`, Lab 255 reproduces all 21 scored entries (return, drawdown, trades): `replay-legacy.jsonl`. Under `tv_exact_v1`, `replay-check.json` shows differences of up to about 108 points of return. `legacy_v1` differs from TradingView: its EMA is recomputed over a window, indicators equal the price during warm-up from bar 55, and stops and targets are read on closes. `tv_exact_v1` was compared with real TradingView logs on 6 of these scripts over 4,000 candles: 234 of 234 trades matched in date and price. That does not cover every script.
+
+Round 1 is not rescored. Round 1 and round 2 figures must not be compared directly.
+
+## Corrections to this plan
+
+2 November 2026, before the first scored candle: the first version said the cause of the round 1 differences was not established, and that indicators warmed up on the scored tape "as in round 1", which was wrong. It also left the execution semantics to the default. The tape start, the equity method, the explicit semantics and this section were added. The frozen strategies and the first scored candle did not change.
 
 Research and education only, not financial advice.

@@ -1,5 +1,5 @@
 diff --git a/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs b/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
-index 073c924..95afec3 100644
+index 073c924..f2bf35e 100644
 --- a/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
 +++ b/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
 @@ -785,14 +785,18 @@ fn plateau_255_bench_argon() {
@@ -45,7 +45,7 @@ index 073c924..95afec3 100644
 +            rows.push_str(&format!("{}\n", json!({"runId":s["runId"],"ran":false,"reason":"no script"})));
 +            continue;
 +        }
-+        let args = json!({"script":script,"datasetId":d,"feeBps":10});
++        let args = json!({"script":script,"datasetId":d,"feeBps":10,"executionSemantics":"tv_exact_v1","includeTrades":true,"verbosity":"full"});
 +        let vp = vault.clone();
 +        let (prepared, _) = crate::mcp_ergonomics::prepare_call("run_sandbox_backtest", args, crate::mcp_ergonomics::McpProfile::Full, move || Ok(vp)).unwrap();
 +        let v = vault.clone();
@@ -53,7 +53,7 @@ index 073c924..95afec3 100644
 +        let row = match out {
 +            Some(o) => {
 +                let m = &o["structuredContent"]["backtest"]["metrics"];
-+                json!({"runId":s["runId"],"ran":o["isError"] != true,"reason":o["content"][0]["text"].as_str().filter(|_| o["isError"] == true),"pnl_pct":m["pnl_pct"],"max_drawdown_pct":m["max_drawdown_pct"],"trades":m["trades"],"buyHoldPct":m["buyHoldPct"]})
++                json!({"runId":s["runId"],"tradeLog":m["trade_log"],"equityFinal":m["equity_final"],"ran":o["isError"] != true,"reason":o["content"][0]["text"].as_str().filter(|_| o["isError"] == true),"pnl_pct":m["pnl_pct"],"max_drawdown_pct":m["max_drawdown_pct"],"trades":m["trades"],"buyHoldPct":m["buyHoldPct"]})
 +            }
 +            None => json!({"runId":s["runId"],"ran":false,"reason":"no dispatch"}),
 +        };
