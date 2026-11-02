@@ -1,0 +1,65 @@
+diff --git a/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs b/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
+index 073c924..95afec3 100644
+--- a/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
++++ b/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
+@@ -785,14 +785,18 @@ fn plateau_255_bench_argon() {
+         for kind in var("P255_BENCH_KINDS", "NULL,EDGE").split(',') {
+             let started = Instant::now();
+             let mut tally: BTreeMap<String, u64> = BTreeMap::new();
+-            for seed in 1..=n {
++            let seed_start: u64 = var(&format!("P255_BENCH_SEED_START_{kind}"), "1").parse().unwrap();
++            let count: u64 = var(&format!("P255_BENCH_N_{kind}"), &n.to_string()).parse().unwrap();
++            for seed in seed_start..seed_start + count {
+                 let g = ctx(&format!("bench-{arm}-{kind}-{seed}"));
+-                let d = import(g.vault.as_deref().unwrap(), bench_csv(kind, bars, seed), &format!("B{kind}{seed}"), "1d");
++                let csv = bench_csv(kind, bars, seed);
++                let csv_sha = { use sha2::{Digest, Sha256}; Sha256::digest(csv.as_bytes()).iter().map(|b| format!("{b:02x}")).collect::<String>() };
++                let d = import(g.vault.as_deref().unwrap(), csv, &format!("B{kind}{seed}"), "1d");
+                 let m = ok(dispatch_at(&g, TOOL_MOVE, &json!({"datasetId":d,"structures":structures,"budget":{"trials":trials},"seed":seed,"backend":CPU,"waitMs":600_000})));
+                 assert_eq!(m["state"], "complete", "{m}");
+                 let evaluated = m["trials"]["evaluated"].clone();
+                 let statuses: Vec<Value> = m["structures"].as_array().unwrap().iter().map(|s| json!({"name":s["name"],"status":s["status"],"reason":s["reason"],"preferred":s["preferredOverTop"]["rank"],"topEvents":s["preferredOverTop"]["topExpectedTestEvents"]})).collect();
+-                writeln!(out, "{}", json!({"kind":"move","arm":arm,"data":kind,"seed":seed,"trials":evaluated,"structures":statuses,"ms":started.elapsed().as_millis() as u64})).unwrap();
++                writeln!(out, "{}", json!({"kind":"move","arm":arm,"data":kind,"seed":seed,"csvSha256":csv_sha,"trials":evaluated,"structures":statuses,"ms":started.elapsed().as_millis() as u64})).unwrap();
+                 for o in m["cells"]["occupied"].as_array().unwrap().clone() {
+                     let cell = o["cell"].clone();
+                     let p = ok(dispatch_at(&g, TOOL_PROMOTE, &json!({"datasetId":d,"cell":cell,"lang":"en"})));
+@@ -846,3 +850,38 @@ fn plateau_255_exit_events_at_default() {
+     }
+     assert_eq!(list_report_files(&g.store).len(), 0);
+ }
++
++/// Round 2 of the AI leaderboard: replays frozen scripts on a CSV tape through the sandbox dispatcher. `R2_SCRIPTS` JSON list of {runId, script}, `R2_CSV`, `R2_OUT` JSONL.
++#[test]
++#[ignore = "round 2 replay, reads local data"]
++fn round2_replay() {
++    let var = |k: &str| std::env::var(k).unwrap();
++    let scripts: Vec<Value> = serde_json::from_str(&fs::read_to_string(var("R2_SCRIPTS")).unwrap()).unwrap();
++    let g = ctx("round2");
++    let vault = g.vault.clone().unwrap();
++    let d = import(&vault, fs::read_to_string(var("R2_CSV")).unwrap(), "BTC", "4h");
++    let mut rows = String::new();
++    for s in &scripts {
++        let script = s["script"].as_str().unwrap_or("");
++        if script.is_empty() {
++            rows.push_str(&format!("{}\n", json!({"runId":s["runId"],"ran":false,"reason":"no script"})));
++            continue;
++        }
++        let args = json!({"script":script,"datasetId":d,"feeBps":10});
++        let vp = vault.clone();
++        let (prepared, _) = crate::mcp_ergonomics::prepare_call("run_sandbox_backtest", args, crate::mcp_ergonomics::McpProfile::Full, move || Ok(vp)).unwrap();
++        let v = vault.clone();
++        let out = crate::sandbox_mcp::dispatch("run_sandbox_backtest", &prepared, move || Ok(v));
++        let row = match out {
++            Some(o) => {
++                let m = &o["structuredContent"]["backtest"]["metrics"];
++                json!({"runId":s["runId"],"ran":o["isError"] != true,"reason":o["content"][0]["text"].as_str().filter(|_| o["isError"] == true),"pnl_pct":m["pnl_pct"],"max_drawdown_pct":m["max_drawdown_pct"],"trades":m["trades"],"buyHoldPct":m["buyHoldPct"]})
++            }
++            None => json!({"runId":s["runId"],"ran":false,"reason":"no dispatch"}),
++        };
++        rows.push_str(&format!("{row}\n"));
++    }
++    fs::write(var("R2_OUT"), rows).unwrap();
++    let _ = fs::remove_dir_all(&g.store);
++    let _ = fs::remove_dir_all(&vault);
++}

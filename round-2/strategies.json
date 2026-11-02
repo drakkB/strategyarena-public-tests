@@ -1,0 +1,163 @@
+[
+ {
+  "runId": "mimo-1",
+  "model": "Xiaomi MiMo v2.6 Pro",
+  "abstained": false,
+  "script": "strategy \"Dual SMA let-run\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: SMA(11) > SMA(209)\n    size: 100%\n\nexit:\n    # let winners run\n\nparams:\n    fast: min=10 max=50 type=int default=11\n    slow: min=80 max=280 type=int default=209\n",
+  "sha256": "047c93c03d30c858c7f51a8b61c60bf3078869e1e53b4ba0b6f32176e1cfac2e"
+ },
+ {
+  "runId": "gemini-1",
+  "model": "Gemini 3.8 Flash",
+  "abstained": false,
+  "script": "strategy \"Dual SMA 12-210\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: SMA(12) > SMA(210)\n    size: 100%\n\nexit:\n    # let winners run\n",
+  "sha256": "ef47e056af313546fc892632a0a45441d951c76c9f29fbbfb700b34ec56f9ea9"
+ },
+ {
+  "runId": "gemini-2",
+  "model": "Gemini 3.8 Flash",
+  "abstained": false,
+  "script": "strategy \"Dual SMA 12-210\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: SMA(12) > SMA(210)\n    size: 100%\n\nexit:\n    # let run\n",
+  "sha256": "3fcaec9acf6aa080dfe9b4130fd50ba9c65e61fd8ca85934643dd75d3c81cab8"
+ },
+ {
+  "runId": "muse-1",
+  "model": "Muse Spark 1.3 (contributor, free)",
+  "abstained": false,
+  "script": "strategy \"Cash under SMA200\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\nentry:\n    condition: price > SMA(200)\n    size: 100%\nexit:\n    # let winners run — no take-profit, no timeout\n",
+  "sha256": "8fcb14c3dd7575fd97d81f05880478f66122c421334e73df00ff8a759d2b9986"
+ },
+ {
+  "runId": "deepseek-1",
+  "model": "deepseek-flash",
+  "abstained": false,
+  "script": "strategy \"DeepSeek SMA Long T120 F17 S298\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: SMA(17) > SMA(298)\n    size: 100%\n\nexit:\n    timeout: 120 bars\n",
+  "sha256": "152d597404dcf2537d584a713c5c32304fd5d06e2e9d6c687605e1d3c678cdaa"
+ },
+ {
+  "runId": "sonnet-1",
+  "model": "Claude Sonnet 5",
+  "abstained": false,
+  "script": "strategy \"EMA cross 40/200\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: EMA(40) crosses above EMA(200)\n    size: 100%\n\nexit:\n    timeout: 100000 bars\nparams:\n    fast: min=5 max=60 type=int default=40\n    slow: min=70 max=300 type=int default=200\n",
+  "sha256": "a73b420991d4188e16115f105a25c2c9f3cfd4432a7b274af8b57914d263ad1f"
+ },
+ {
+  "runId": "mimo-2",
+  "model": "Xiaomi MiMo v2.6 Pro",
+  "abstained": false,
+  "script": "strategy \"Dual SMA 17/280\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: SMA(17) > SMA(280)\n    size: 100%\n\nexit:\n    # let winners run\n\nparams:\n    fast: min=10 max=80 type=int default=17\n    slow: min=100 max=300 type=int default=280\n",
+  "sha256": "6406c6caf8c81734a0100c16efc1b926ad274357a6e5eadd51b30704f46fe318"
+ },
+ {
+  "runId": "gpt56-1",
+  "model": "GPT 5.6 Sol",
+  "abstained": false,
+  "script": "strategy \"BTC Filtered Breakout 60-250-40\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: price > DONCHIAN_HIGH(60)\n    and price > EMA(250)\n    size: 100%\n\nexit:\n    condition: price < SMA(40)\n    signal_exit: off\n",
+  "sha256": "909fbe8b3d8d1c33efc44c5c1beb1b53b4a14eb608bea1e4c3c34130733688ae"
+ },
+ {
+  "runId": "opus-1",
+  "model": "Claude Opus 5.5",
+  "abstained": false,
+  "script": "strategy \"EMA trend 300\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: price > EMA(300)\n    size: 100%\n\nparams:\n    emaLength: min=20 max=800 type=int default=300\n",
+  "sha256": "cad40faf7568a5c821bcda71e70f97edd43893b619189622e75b87c5e821eb49"
+ },
+ {
+  "runId": "fable-2",
+  "model": "Claude Fable 5.1",
+  "abstained": false,
+  "script": "strategy \"EMA trend 300\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: price > EMA(300)\n    size: 100%\n\nexit:\n    # let winners run\n",
+  "sha256": "591523feb1ed31469d8395683ea8211359f98b08650167aaa9d7635631041bdb"
+ },
+ {
+  "runId": "gpt56-2",
+  "model": "GPT 5.6 Sol",
+  "abstained": false,
+  "script": "strategy \"Event momentum robust\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: ROC(23) > 6.7\n    or price > DONCHIAN_HIGH(23)\n    size: 100%\n\nexit:\n    stop_loss: 7%\n    take_profit: 6%\n    trailing_stop: 1.65%\n    cooldown: 22 bars\n",
+  "sha256": "5b6d18206d51b710d98bef0420a5ccc41f5a19e8baca25bd7379013f8cfe0441"
+ },
+ {
+  "runId": "sonnet-2",
+  "model": "Claude Sonnet 5",
+  "abstained": false,
+  "script": "strategy \"BTC Slow Trend SMA245\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n  condition: price > SMA(245)\n  size: 100%\n\nexit:\n\nparams:\n  smaLength: min=30 max=400 type=int default=245\n",
+  "sha256": "46df47cb38cea91824b1c903a77f76b7fa6016144c30721771e92f213299bfcd"
+ },
+ {
+  "runId": "deepseek-2",
+  "model": "deepseek-flash",
+  "abstained": false,
+  "script": "strategy \"BTC 4h SMA trend filter\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n# Long-only trend filter: hold while close > SMA(240) (~40 days on 4h), otherwise cash.\n# Let-run: no take-profit, no stop, no timeout; exit when the entry thesis is false.\n\nparams:\n    smaLength: min=60 max=400 type=int default=240\n\nentry:\n    condition: price > SMA(240)\n    size: 100%\n\nexit:\n",
+  "sha256": "9e237b54f3e6b9990a6de97895a4572bb40d03d6c32a499a448652f9d4a58237"
+ },
+ {
+  "runId": "fable-1",
+  "model": "Claude Fable 5.1",
+  "abstained": false,
+  "script": "strategy \"BTC trend filter SMA280 + 30d momentum\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n# Long-only regime filter: hold BTC only while price is above its 280-bar (~47-day) SMA\n# AND the 180-bar (~30-day) rate of change is positive. Flat (cash) otherwise.\n\nentry:\n    condition: price > SMA(280)\n    and ROC(180) > 0\n    size: 100%\n\nexit:\n    signal_exit: on_entry_failure\n",
+  "sha256": "9267919f49c0fc4e7878f35804eeff34bd957afe3c4e6ad9e864741047bbf7ed"
+ },
+ {
+  "runId": "muse-2",
+  "model": "Muse Spark 1.3 (contributor, free)",
+  "abstained": false,
+  "script": "strategy \"Donchian55 robust\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: price > DONCHIAN_HIGH(55)\n    size: 100%\n\nexit:\n    stop_loss: 12.07%\n    take_profit: 49.2%\n    timeout: 247 bars\n",
+  "sha256": "44448b51bd32ea95d38e6e6ca96db7d9bf2f90e22dcc7925d614a3cf4e8948f1"
+ },
+ {
+  "runId": "opus-2",
+  "model": "Claude Opus 5.5",
+  "abstained": false,
+  "script": "strategy \"E250\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n  condition: price > EMA(250)\n  size: 100%\n\nexit:\n  # thesis exit\n",
+  "sha256": "ab1e931c168d19e12b95faa9a205ec57d9a40a1d5ecba780f876ab2d322419c3"
+ },
+ {
+  "runId": "grok-1",
+  "model": "Grok 4.6",
+  "abstained": false,
+  "script": "strategy \"sma200_cd12\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: price > SMA(200)\n    size: 100%\n\nexit:\n    signal_exit: on_entry_failure\n    cooldown: 12\n",
+  "sha256": "d56ca7f4dafc757a682217d8521ccee584791d15c6b55335f8b2dcb16f5112b4"
+ },
+ {
+  "runId": "grok47-1",
+  "model": "Grok 4.7",
+  "abstained": false,
+  "script": "strategy \"ema 170 long\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: price > EMA(170)\n    size: 100%\n\nexit:\n    # flat when price is back under the EMA\n",
+  "sha256": "9d89e81a87671e40a87d07432d66e84dac25f388fd6a7d3ba79f1cf40e2e8443"
+ },
+ {
+  "runId": "astra6-1",
+  "model": "Astra 6",
+  "abstained": false,
+  "script": "strategy \"Astra6 SMA240 long cash\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nparams:\n    smaLength: min=240 max=240 type=int default=240\n\nentry:\n    condition: price > SMA(240)\n    size: 100%\n\nexit:\n    signal_exit: on_entry_failure\n",
+  "sha256": "c0390203a05d30a304eb39c341ed640433114f86c32cd9ab7118ffff88d76f93"
+ },
+ {
+  "runId": "astra6-2",
+  "model": "Astra 6",
+  "abstained": false,
+  "script": "strategy \"Astra6 S2 SMA240 trend\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: price > SMA(240)\n    size: 100%\n\nexit:\n    signal_exit: on_entry_failure\n",
+  "sha256": "3015e5b73fd4ec04e1e70b129813de26501738eca6664acdc608967de1512638"
+ },
+ {
+  "runId": "grok47-2",
+  "model": "Grok 4.7",
+  "abstained": true,
+  "script": "",
+  "sha256": null
+ },
+ {
+  "runId": "haiku-1",
+  "model": "Claude Haiku 4.5",
+  "abstained": false,
+  "script": "strategy \"BTC EMA Crossover Strategy\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n    condition: EMA(16) crosses above EMA(50)\n    size: 64%\n\nshort_entry:\n    condition: EMA(16) crosses below EMA(50)\n    size: 64%\n\nexit:\n    take_profit: 2.5%\n    stop_loss: 1.1%\n    timeout: 53 bars",
+  "sha256": "fc1cf7e72e87a28f5d84b445ced5d230e0145805218938bd049e821606e1a2cb"
+ },
+ {
+  "runId": "haiku-2",
+  "model": "Claude Haiku 4.5",
+  "abstained": false,
+  "script": "strategy \"Trend + ADX Filter\" version 1.0\nasset: BTC\ntimeframe: 4h\ncapital: 10000\n\nentry:\n  condition: SMA(20) > SMA(50)\n  and ADX(14) > 25\n  size: 50%\n\nshort_entry:\n  condition: SMA(20) < SMA(50)\n  and ADX(14) > 25\n  size: 50%\n\nexit:\n  take_profit: 5%\n  stop_loss: 2.5%\n  timeout: 60 bars",
+  "sha256": "bf550d505cdb2c62ede293a84cbbc705c585139db7e36d1cfd1e578f16821867"
+ }
+]

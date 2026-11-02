@@ -1,0 +1,222 @@
+[
+ {
+  "runId": "mimo-1",
+  "round1ReturnPct": 146.48,
+  "lab255ReturnPct": 143.83,
+  "round1Trades": 46,
+  "lab255Trades": 31,
+  "round1MaxDrawdownPct": 30.05,
+  "lab255MaxDrawdownPct": 30.05,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "gemini-1",
+  "round1ReturnPct": 152.72,
+  "lab255ReturnPct": 151.97,
+  "round1Trades": 44,
+  "lab255Trades": 30,
+  "round1MaxDrawdownPct": 30.2,
+  "lab255MaxDrawdownPct": 30.2,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "gemini-2",
+  "round1ReturnPct": 152.72,
+  "lab255ReturnPct": 151.97,
+  "round1Trades": 44,
+  "lab255Trades": 30,
+  "round1MaxDrawdownPct": 30.2,
+  "lab255MaxDrawdownPct": 30.2,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "muse-1",
+  "round1ReturnPct": 132.13,
+  "lab255ReturnPct": 132.36,
+  "round1Trades": 84,
+  "lab255Trades": 83,
+  "round1MaxDrawdownPct": 31.18,
+  "lab255MaxDrawdownPct": 31.18,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "deepseek-1",
+  "round1ReturnPct": 176.41,
+  "lab255ReturnPct": 118.16,
+  "round1Trades": 38,
+  "lab255Trades": 35,
+  "round1MaxDrawdownPct": 41.46,
+  "lab255MaxDrawdownPct": 41.46,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "sonnet-1",
+  "round1ReturnPct": 239.81,
+  "lab255ReturnPct": 132.14,
+  "round1Trades": 34,
+  "lab255Trades": 18,
+  "round1MaxDrawdownPct": 26.43,
+  "lab255MaxDrawdownPct": 25.85,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "mimo-2",
+  "round1ReturnPct": 216.54,
+  "lab255ReturnPct": 216.17,
+  "round1Trades": 34,
+  "lab255Trades": 19,
+  "round1MaxDrawdownPct": 27.53,
+  "lab255MaxDrawdownPct": 27.53,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "gpt56-1",
+  "round1ReturnPct": 20.91,
+  "lab255ReturnPct": 17.03,
+  "round1Trades": 52,
+  "lab255Trades": 52,
+  "round1MaxDrawdownPct": 29,
+  "lab255MaxDrawdownPct": 31.28,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "opus-1",
+  "round1ReturnPct": 95.35,
+  "lab255ReturnPct": 111.43,
+  "round1Trades": 89,
+  "lab255Trades": 80,
+  "round1MaxDrawdownPct": 33.45,
+  "lab255MaxDrawdownPct": 32.17,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "fable-2",
+  "round1ReturnPct": 95.35,
+  "lab255ReturnPct": 111.43,
+  "round1Trades": 89,
+  "lab255Trades": 80,
+  "round1MaxDrawdownPct": 33.45,
+  "lab255MaxDrawdownPct": 32.17,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "gpt56-2",
+  "round1ReturnPct": 62.95,
+  "lab255ReturnPct": 44.43,
+  "round1Trades": 85,
+  "lab255Trades": 93,
+  "round1MaxDrawdownPct": 36.99,
+  "lab255MaxDrawdownPct": 36.84,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "sonnet-2",
+  "round1ReturnPct": 108.19,
+  "lab255ReturnPct": 108.4,
+  "round1Trades": 81,
+  "lab255Trades": 80,
+  "round1MaxDrawdownPct": 37.27,
+  "lab255MaxDrawdownPct": 37.27,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "deepseek-2",
+  "round1ReturnPct": 103.28,
+  "lab255ReturnPct": 103.49,
+  "round1Trades": 81,
+  "lab255Trades": 80,
+  "round1MaxDrawdownPct": 38.03,
+  "lab255MaxDrawdownPct": 38.03,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "fable-1",
+  "round1ReturnPct": 77.13,
+  "lab255ReturnPct": 77.3,
+  "round1Trades": 96,
+  "lab255Trades": 95,
+  "round1MaxDrawdownPct": 38.28,
+  "lab255MaxDrawdownPct": 38.28,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "muse-2",
+  "round1ReturnPct": 109.03,
+  "lab255ReturnPct": 97.91,
+  "round1Trades": 21,
+  "lab255Trades": 23,
+  "round1MaxDrawdownPct": 39.73,
+  "lab255MaxDrawdownPct": 43.17,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "opus-2",
+  "round1ReturnPct": 77.95,
+  "lab255ReturnPct": 76.66,
+  "round1Trades": 93,
+  "lab255Trades": 94,
+  "round1MaxDrawdownPct": 41.31,
+  "lab255MaxDrawdownPct": 37.18,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "grok-1",
+  "round1ReturnPct": 108.76,
+  "lab255ReturnPct": 108.97,
+  "round1Trades": 56,
+  "lab255Trades": 55,
+  "round1MaxDrawdownPct": 30.99,
+  "lab255MaxDrawdownPct": 30.99,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "grok47-1",
+  "round1ReturnPct": 99.92,
+  "lab255ReturnPct": 129.93,
+  "round1Trades": 110,
+  "lab255Trades": 100,
+  "round1MaxDrawdownPct": 36.6,
+  "lab255MaxDrawdownPct": 34.94,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "astra6-1",
+  "round1ReturnPct": 103.28,
+  "lab255ReturnPct": 103.49,
+  "round1Trades": 81,
+  "lab255Trades": 80,
+  "round1MaxDrawdownPct": 38.03,
+  "lab255MaxDrawdownPct": 38.03,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "astra6-2",
+  "round1ReturnPct": 103.28,
+  "lab255ReturnPct": 103.49,
+  "round1Trades": 81,
+  "lab255Trades": 80,
+  "round1MaxDrawdownPct": 38.03,
+  "lab255MaxDrawdownPct": 38.03,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "haiku-1",
+  "round1ReturnPct": -22.08,
+  "lab255ReturnPct": -17.9,
+  "round1Trades": 236,
+  "lab255Trades": 138,
+  "round1MaxDrawdownPct": 30.99,
+  "lab255MaxDrawdownPct": 25.21,
+  "round1ErrorCode": null
+ },
+ {
+  "runId": "haiku-2",
+  "round1ReturnPct": null,
+  "lab255ReturnPct": -18.42,
+  "round1Trades": null,
+  "lab255Trades": 379,
+  "round1MaxDrawdownPct": null,
+  "lab255MaxDrawdownPct": 48.81,
+  "round1ErrorCode": "sandbox.work_budget_exceeded"
+ }
+]
