@@ -1,0 +1,26 @@
+diff --git a/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs b/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
+index 073c924..c11c202 100644
+--- a/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
++++ b/apps/strategyarena-tauri/src-tauri/src/plateau_255_tests.rs
+@@ -785,14 +785,18 @@ fn plateau_255_bench_argon() {
+         for kind in var("P255_BENCH_KINDS", "NULL,EDGE").split(',') {
+             let started = Instant::now();
+             let mut tally: BTreeMap<String, u64> = BTreeMap::new();
+-            for seed in 1..=n {
++            let seed_start: u64 = var(&format!("P255_BENCH_SEED_START_{kind}"), "1").parse().unwrap();
++            let count: u64 = var(&format!("P255_BENCH_N_{kind}"), &n.to_string()).parse().unwrap();
++            for seed in seed_start..seed_start + count {
+                 let g = ctx(&format!("bench-{arm}-{kind}-{seed}"));
+-                let d = import(g.vault.as_deref().unwrap(), bench_csv(kind, bars, seed), &format!("B{kind}{seed}"), "1d");
++                let csv = bench_csv(kind, bars, seed);
++                let csv_sha = { use sha2::{Digest, Sha256}; Sha256::digest(csv.as_bytes()).iter().map(|b| format!("{b:02x}")).collect::<String>() };
++                let d = import(g.vault.as_deref().unwrap(), csv, &format!("B{kind}{seed}"), "1d");
+                 let m = ok(dispatch_at(&g, TOOL_MOVE, &json!({"datasetId":d,"structures":structures,"budget":{"trials":trials},"seed":seed,"backend":CPU,"waitMs":600_000})));
+                 assert_eq!(m["state"], "complete", "{m}");
+                 let evaluated = m["trials"]["evaluated"].clone();
+                 let statuses: Vec<Value> = m["structures"].as_array().unwrap().iter().map(|s| json!({"name":s["name"],"status":s["status"],"reason":s["reason"],"preferred":s["preferredOverTop"]["rank"],"topEvents":s["preferredOverTop"]["topExpectedTestEvents"]})).collect();
+-                writeln!(out, "{}", json!({"kind":"move","arm":arm,"data":kind,"seed":seed,"trials":evaluated,"structures":statuses,"ms":started.elapsed().as_millis() as u64})).unwrap();
++                writeln!(out, "{}", json!({"kind":"move","arm":arm,"data":kind,"seed":seed,"csvSha256":csv_sha,"trials":evaluated,"structures":statuses,"ms":started.elapsed().as_millis() as u64})).unwrap();
+                 for o in m["cells"]["occupied"].as_array().unwrap().clone() {
+                     let cell = o["cell"].clone();
+                     let p = ok(dispatch_at(&g, TOOL_PROMOTE, &json!({"datasetId":d,"cell":cell,"lang":"en"})));
